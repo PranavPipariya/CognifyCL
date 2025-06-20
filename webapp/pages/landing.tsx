@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
+
+
 export default function Landing() {
   const router = useRouter();
   const [installed, setInstalled] = useState(false);
@@ -44,6 +46,9 @@ export default function Landing() {
         <Button className="px-6 py-4 text-lg font-medium" onClick={handleInstallClick}>
           ➕ Install Chrome Extension
         </Button>
+        {/* <Button effect="expandIcon" icon={ArrowRightIcon} iconPlacement="right">
+  Icon right
+</Button>; */}
       </div>
     </div>
   );
