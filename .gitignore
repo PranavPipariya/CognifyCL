@@ -1,6 +1,21 @@
-node_modules/
+#  Sensitive & Environment Files
 .env
-dist/
 .DS_Store
 
+#  Node Modules and Build Output
+node_modules/
+webapp/node_modules/
+dist/
 webapp/.next
+
+#  Local LLMs, Models & Engines
+llama-engine/
+models/
+*.gguf
+*.bin
+
+#  Local Assets Related to AI Runtimes
+web-llm/
+webapp/public/models/
+webapp/public/weights/
+webapp/public/tokenizer/
