@@ -57,7 +57,7 @@ export default function HomeRedirect() {
   useEffect(() => {
     const installed = localStorage.getItem("cognify_installed");
     if (installed === "true") {
-      router.push("/main");
+      router.push("/dashboard");
     } else {
       router.push("/landing");
     }
