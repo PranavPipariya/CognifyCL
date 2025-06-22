@@ -11,12 +11,12 @@ export default function Landing() {
   useEffect(() => {
     const alreadyInstalled = localStorage.getItem("cognify_installed");
     if (alreadyInstalled) {
-      router.push("/main");
+      router.push("/dashboard");
     }
   }, []);
 
   const handleInstallClick = () => {
-    localStorage.setItem("cognify_installed", "true");
+    // localStorage.setItem("cognify_installed", "true");
     window.open(
       "https://example.com/your-chrome-extension-link",
       "_blank"
@@ -43,12 +43,10 @@ export default function Landing() {
         <p className="text-md text-gray-600 mb-8">
           Seamlessly build your public knowledge graph with zero effort. Let the browser do the work.
         </p>
+         
         <Button className="px-6 py-4 text-lg font-medium" onClick={handleInstallClick}>
           ➕ Install Chrome Extension
         </Button>
-        {/* <Button effect="expandIcon" icon={ArrowRightIcon} iconPlacement="right">
-  Icon right
-</Button>; */}
       </div>
     </div>
   );
