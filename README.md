@@ -105,12 +105,12 @@ cmake .. -DLLAMA_METAL=ON
 cmake --build . --config Release
 ```
 
-then again go to llama.cpp directory i.e /CognifyCL/llama-engine/llama.cpp,
+then again go to llama.cpp directory i.e   /CognifyCL/llama-engine/llama.cpp by doing:
 ```bash
 cd ..
 ```
 
- then run:
+ then inside llama.cpp run:
 ```bash
 mkdir -p models/gemma
 cd models/gemma
@@ -182,8 +182,6 @@ Runs at: `http://localhost:3000`
 
 * **LLM not responding**:
 
-  * Ensure `llama.cpp` is compiled correctly.
-  * Confirm the path in `binaryPath` is accurate.
   * Verify the model is named `tinyllama-chat.gguf` and located in:
     `llama-engine/llama.cpp/models/gemma/tinyllama-chat.gguf`
 
