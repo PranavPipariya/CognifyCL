@@ -1,20 +1,42 @@
 
+
 'use client';
 import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import * as d3 from 'd3';
+import { getAllCategories } from '@/lib/dataStore';
 
-const nodes = [
-  { id: "Math" }, { id: "Programming" }, { id: "Watchmaking" },
-  { id: "Drawing" }, { id: "Woodworking" }, { id: "Piano" }
+// All possible categories (master list)
+const allCategories = [
+  "Math", "Programming", "Watchmaking", "Drawing", "Woodworking", "Piano", "Health", "Science", "Games", "Miscellaneous"
 ];
 
+// Predefined link relationships
 const links = [
   { source: "Math", target: "Programming" },
-  { source: "Math", target: "Watchmaking" },
-  { source: "Watchmaking", target: "Piano" },
+  { source: "Math", target: "Science" },
+  { source: "Math", target: "Drawing" },
+
+  { source: "Programming", target: "Games" },
+  { source: "Programming", target: "Science" },
+
+  { source: "Drawing", target: "Piano" },
   { source: "Drawing", target: "Woodworking" },
-  { source: "Math", target: "Drawing" }
+
+  { source: "Piano", target: "Health" },
+  { source: "Piano", target: "Watchmaking" },
+
+  { source: "Woodworking", target: "Watchmaking" },
+
+  { source: "Watchmaking", target: "Health" },
+
+  { source: "Science", target: "Health" },
+
+  { source: "Games", target: "Math" },
+
+  { source: "Miscellaneous", target: "Games" },
+  { source: "Miscellaneous", target: "Watchmaking" },
+  { source: "Miscellaneous", target: "Drawing" }
 ];
 
 export function InterestGraph() {
@@ -22,6 +44,15 @@ export function InterestGraph() {
   const router = useRouter();
 
   useEffect(() => {
+    // Get visited categories
+    const visited = new Set(getAllCategories());
+
+    // Create nodes with visited status
+    const nodes = allCategories.map(cat => ({
+      id: cat,
+      visited: visited.has(cat)
+    }));
+
     const svg = d3.select(svgRef.current)
       .attr('width', '100%')
       .attr('height', 600)
@@ -38,7 +69,7 @@ export function InterestGraph() {
       .selectAll("line")
       .data(links)
       .join("line")
-      .attr("stroke", "#888")
+      .attr("stroke", "#aaa")
       .attr("stroke-width", 1.5);
 
     const node = svg.append("g")
@@ -63,16 +94,13 @@ export function InterestGraph() {
 
     node.append("circle")
       .attr("r", 15)
-      .attr("fill", "#a6c8ff")
+      .attr("fill", d => d.visited ? "#ff4d4f" : "#a6c8ff")
       .attr("stroke", "#5a6b7c")
       .attr("stroke-width", 2)
-    //   .on("click", (event, d) => {
-    //     router.push(`/category/${encodeURIComponent(d.id)}`);
-    //   });
-    .style("cursor", "pointer")
-  .on("click", (_, d) => {
-    window.location.href = `/category/${encodeURIComponent(d.id)}`;
-  });
+      .style("cursor", "pointer")
+      .on("click", (_, d) => {
+        window.location.href = `/category/${encodeURIComponent(d.id)}`;
+      });
 
     node.append("text")
       .attr("dx", 28)
