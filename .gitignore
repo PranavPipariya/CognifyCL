@@ -19,3 +19,14 @@ web-llm/
 webapp/public/models/
 webapp/public/weights/
 webapp/public/tokenizer/
+
+
+# Logs
+*.log
+
+# Editor settings
+.vscode/
+.idea/
+
+# Next.js cache
+.next/cache/
