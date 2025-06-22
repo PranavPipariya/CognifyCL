@@ -101,7 +101,7 @@ export default function CategoryPage() {
                     <h3 className="text-lg font-light text-gray-800 mb-1 tracking-tight">
                       {entry.title}
                     </h3>
-                    <p className="text-sm text-blue-600 truncate">{entry.url}</p>
+                    <p className="text-sm text-blue-600 break-all">{entry.url}</p>
                     <p className="text-xs text-gray-400 mt-1">{new Date(entry.timestamp).toLocaleString()}</p>
                   </div>
                 ))
