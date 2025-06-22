@@ -1,0 +1,13 @@
+{
+  "Math": [
+    "https://example.com/conway",
+    "https://example.com/set-theory"
+  ],
+  "Programming": [
+    "https://example.com/react",
+    "https://example.com/zig"
+  ],"Pro": [
+    "https://example.com/reacts",
+    "https://example.com/zigs"
+  ]
+}
