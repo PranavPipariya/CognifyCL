@@ -13,14 +13,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { content } = req.body; // content is the URL string
+  const { content } = req.body; 
 
   if (!content || typeof content !== "string") {
     return res.status(400).json({ error: "Invalid content" });
   }
 
   try {
-    // Fetch the HTML content of the URL
+ 
     const response = await fetch(content);
     if (!response.ok) {
       return res.status(400).json({ error: "Failed to fetch URL content" });
@@ -28,7 +28,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const html = await response.text();
 
-    // Extract readable text using Readability
+  
     const dom = new JSDOM(html, { url: content });
     const reader = new Readability(dom.window.document);
     const article = reader.parse();
@@ -37,17 +37,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(400).json({ error: "Could not extract readable content" });
     }
 
-    const readableText = article.textContent.slice(0, 3000); // limit for LLM
+    const readableText = article.textContent.slice(0, 3000); 
 
-    // Generate summary
+ 
     const summary = await runLocalLLMSummary(readableText);
 
-    // Categorize using readable content + summary
+ 
     const category = getCategoryFromContent(readableText + summary);
 
-    // Save to data store
+   
     addEntry({
-      url: content,         // still store the original URL
+      url: content,        
       summary,
       category,
       createdAt: Date.now(),

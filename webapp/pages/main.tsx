@@ -16,7 +16,7 @@ export default function Landing() {
 
   const handleInstallClick = () => {
     localStorage.setItem("cognify_installed", "true");
-    window.open("https://example.com/your-chrome-extension-link", "");
+    window.open("https://github.com/PranavPipariya/CognifyCL/tree/main/extension", "");
     setTimeout(() => {
       router.push("/main");
     }, 1000);

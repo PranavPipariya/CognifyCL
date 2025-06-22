@@ -48,6 +48,8 @@ app.post('/sync', (req, res) => {
 
   categorizeAndStore(newEntry);
 
+   console.log("Received content:", newEntry);
+
   res.json({ status: 'ok' });
 });
 
@@ -132,6 +134,7 @@ function categorizeAndStore(entry) {
   if (!text) {
     storeEntry('Miscellaneous', entry);
     return;
+     console.log("Received content:", entry);
   }
 
 
@@ -149,6 +152,7 @@ function categorizeAndStore(entry) {
     if (score > bestScore) {
       bestScore = score;
       bestCategory = category;
+      // console.log(score);
     }
   }
 
@@ -164,6 +168,8 @@ function storeEntry(category, entry) {
   let categoryData = [];
   if (fs.existsSync(categoryFile)) {
     categoryData = JSON.parse(fs.readFileSync(categoryFile));
+
+     console.log("generated content:", categoryData);
   }
 
   categoryData.unshift(entry);
@@ -179,6 +185,7 @@ app.post('/clear', (_req, res) => {
     for (const file of fs.readdirSync(categoryDir)) {
       if (file.startsWith('entries_') && file.endsWith('.json')) {
         fs.writeFileSync(path.join(categoryDir, file), JSON.stringify([]));
+          console.log(categoryDir);
       }
     }
   }
