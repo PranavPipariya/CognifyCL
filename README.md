@@ -84,13 +84,42 @@ npm install
 
 ### 3. Configure the Summarization Engine
 
-Ensure `llama.cpp` is built and working. Then:
 
-* In `webapp/lib/summarizer.ts`, set the correct path to the compiled binary:
+Inside CognifyCL run: 
 
-  ```ts
-  const binaryPath = "llama-engine/llama.cpp/build/bin/llama-cli";
-  ```
+```bash
+mkdir llama-engine
+cd llama-engine
+```
+
+```bash
+git clone https://github.com/ggerganov/llama.cpp.git
+cd llama.cpp
+```
+
+once you're in /CognifyCL/llama-engine/llama.cpp, then run:
+```bash
+mkdir build
+cd build
+cmake .. -DLLAMA_METAL=ON
+cmake --build . --config Release
+```
+
+then again go to llama.cpp directory i.e /CognifyCL/llama-engine/llama.cpp,
+```bash
+cd ..
+```
+
+ then run:
+```bash
+mkdir -p models/gemma
+cd models/gemma
+```
+
+place the model you downloaded in gemma. do not forget to rename it as tinyllama-chat.gguf !
+
+thats it now your summarisation feature will work.
+
 
 * Download the TinyLlama model:
 
